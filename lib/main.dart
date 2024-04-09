@@ -12,7 +12,7 @@ Future main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(const MyApp());
+  runApp(const StateWidget(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -21,20 +21,14 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) => StateWidget(
-        child: Builder(
-          builder: (context) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              title: title,
-              theme: ThemeData(
-                scaffoldBackgroundColor: StateInheritedModel.colorOf(context),
-                primaryColor: Colors.white,
-              ),
-              home: const MainPage(title: title),
-            );
-          },
+  Widget build(BuildContext context) => MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: title,
+        theme: ThemeData(
+          scaffoldBackgroundColor: StateInheritedModel.colorOf(context),
+          primaryColor: Colors.white,
         ),
+        home: const MainPage(title: title),
       );
 }
 
