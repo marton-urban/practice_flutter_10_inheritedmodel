@@ -16,32 +16,39 @@ class ColorPage extends StatelessWidget {
             child: Container(
               color: Colors.white,
               padding: const EdgeInsets.all(12),
-              child: Column(
+              child: const Column(
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  buildColorButton(context, Colors.red),
-                  buildColorButton(context, Colors.orange),
-                  buildColorButton(context, Colors.greenAccent),
-                  buildColorButton(context, Colors.indigo),
+                  MyColorButton(Colors.red),
+                  MyColorButton(Colors.orange),
+                  MyColorButton(Colors.greenAccent),
+                  MyColorButton(Colors.indigo),
                 ],
               ),
             ),
           ),
         ),
       );
+}
 
-  Widget buildColorButton(BuildContext context, Color color) => Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: color, elevation: 0),
-          onPressed: () {
-            final provider = StateInheritedModel.of(context);
+class MyColorButton extends StatelessWidget {
+  final Color color;
 
-            provider.setColor(color);
-            Navigator.pop(context);
-          },
-          child: Container(height: 100),
-        ),
-      );
+  const MyColorButton(this.color, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 8),
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(backgroundColor: color, elevation: 0),
+        onPressed: () {
+          StateInheritedModel.of(context).setColor(color);
+          Navigator.pop(context);
+        },
+        child: Container(height: 100),
+      ),
+    );
+  }
 }
